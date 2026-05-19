@@ -1,0 +1,82 @@
+﻿<Page x:Class="IT_Forums_orig.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IT_Forums_orig"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="650"
+      Title="MainPage"
+      Background="#20252b">
+
+    <Grid Margin="20" Background="#d1d3e2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ДОБАВИТЬ ЛУПУ -->
+        <TextBox Grid.Row="0" 
+             Height="40" Margin="20" 
+             Style="{StaticResource TextBoxes}"
+             VerticalContentAlignment="Center"
+             Padding="10"/>
+
+        <ListBox Grid.Row="1" 
+             x:Name="EventsList"
+             SelectionChanged="EventsList_SelectionChanged"
+             Background="Transparent" 
+             BorderThickness="0" Margin="10"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="White" 
+                        Width="280" 
+                        Height="350" 
+                        Margin="10" 
+                        CornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="#F0F0F0" CornerRadius="10,10,0,0" Margin="5">
+                                <TextBlock Text="Афиша" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Foreground="Gray"/>
+                            </Border>
+
+                            <StackPanel Grid.Row="1" Margin="10">
+                                <TextBlock Text="{Binding Name}" 
+               FontWeight="Bold" 
+               FontSize="18" 
+               TextWrapping="Wrap"
+               Margin="0,0,0,5"/>
+
+                                <TextBlock Text="{Binding StartDate, StringFormat='{}Начало: {0:dd.MM.yyyy}'}" 
+               FontSize="14" 
+               Foreground="DimGray" 
+               Margin="0,0,0,3"/>
+
+                                <TextBlock Text="{Binding Description}" 
+               FontSize="12" 
+               Foreground="Gray" 
+               TextWrapping="Wrap"
+               MaxHeight="60"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

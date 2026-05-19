@@ -1,0 +1,126 @@
+﻿<Page x:Class="IT_Forums_orig.MembersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IT_Forums_orig"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MembersPage">
+
+    <Grid Margin="20" Background="#d1d3e2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="White" CornerRadius="10" Margin="10" Padding="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Список участников:" Style="{StaticResource TextBlocks}"
+                           FontSize="20" FontWeight="Bold" Margin="0,0,0,15" Foreground="#046ddb"/>
+
+                <ListBox Grid.Row="1" x:Name="ListViewMembers" FontSize="16"
+                         SelectionChanged="ListViewMembers_SelectionChanged"
+                         BorderThickness="0" Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding Members.SecondName}" FontWeight="Bold" FontSize="18" Foreground="#2e59d9"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Members.Name}" FontSize="15" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Members.PapaName}" FontSize="15" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Background="White" CornerRadius="10" Margin="10" Padding="20">
+            <Grid x:Name="DetailsGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Информация об участнике" Style="{StaticResource TextBlocks}"
+                           FontSize="22" FontWeight="Bold" Margin="0,0,0,20" Foreground="#4e73df"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel VerticalAlignment="Top" Margin="0,0,10,0">
+
+                        <TextBlock Text="Зарегистрирован на мероприятие:" FontSize="12" Foreground="Gray" Margin="0,5,0,2"/>
+                        <TextBox x:Name="TxtEventName" Style="{StaticResource TextBoxes}" Height="40" IsReadOnly="True" FontWeight="Bold" Background="#FFFDEB" FontSize="16" Foreground="#D1a100"/>
+
+                        <TextBlock Text="Имя участника:" FontSize="12" Foreground="Gray" Margin="0,10,0,2"/>
+                        <TextBox x:Name="TxtName" Style="{StaticResource TextBoxes}" Height="40" FontSize="16"/>
+
+                        <TextBlock Text="Фамилия:" FontSize="12" Foreground="Gray" Margin="0,10,0,2"/>
+                        <TextBox x:Name="TxtLastName" Style="{StaticResource TextBoxes}" Height="40" FontSize="16"/>
+
+                        <TextBlock Text="Отчество:" FontSize="12" Foreground="Gray" Margin="0,10,0,2"/>
+                        <TextBox x:Name="TxtMiddleName" Style="{StaticResource TextBoxes}" Height="40" FontSize="16"/>
+
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Telephone:" FontSize="12" Foreground="Gray" Margin="0,0,0,2"/>
+                                <TextBox x:Name="TxtPhone" Style="{StaticResource TextBoxes}" Height="40" FontSize="16"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Email:" FontSize="12" Foreground="Gray" Margin="0,0,0,2"/>
+                                <TextBox x:Name="TxtEmail" Style="{StaticResource TextBoxes}" Height="40" FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Separator Margin="0,20,0,15" Background="#EAEAEA"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Группа / Категория:" FontSize="12" Foreground="Gray" Margin="0,0,0,2"/>
+                                <TextBox x:Name="TxtGroup" Style="{StaticResource TextBoxes}" Height="40" IsReadOnly="True" FontWeight="Bold" Background="#F0F4FF" FontSize="16"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Номер билета (Тип):" FontSize="12" Foreground="Gray" Margin="0,0,0,2"/>
+                                <TextBox x:Name="TxtTicketInfo" Style="{StaticResource TextBoxes}" Height="40" IsReadOnly="True" FontWeight="Bold" Background="#FFF4F0" FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid Grid.Row="2" Margin="0,15,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Content="Сохранить изменения" 
+                            Height="45" Background="#1cc88a" Foreground="White" 
+                            FontWeight="Bold" Margin="0,0,10,0" Click="BtnSave_Click"/>
+
+                    <Button Grid.Column="1" Content="Удалить" 
+                            Height="45" Background="#e74a3b" Foreground="White" 
+                            FontWeight="Bold" Click="BtnDelete_Click"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
